@@ -1,0 +1,35 @@
+'Expression' type - Operations (2 args) and Terms (1 arg)
+
+    - Operation:
+    - has two Expression objects as the 'operators'
+        - e.g.
+            - Addition Operation
+                - Expression one is another addition (x + 5)
+                - Expression two is sqrt(5)
+                - final result is    x + 5 + sqrt(5)
+                
+            - Subtraction operation
+                
+            - Fraction operation
+                - terms to be divided
+                
+            - Multiplication operation:
+                - has coefficient and Expression
+                    - e.g. 5 and x -> 5x
+                    - e.g. 5 and (x + 4) -> 5(x + 4)
+                    
+            - Index operation:
+                - Expression and index
+                    - e.g. x and 2 -> x^2
+    
+    - Square root term:
+        - Expression to be square rooted
+            - e.g. 25 -> sqrt(25)
+        
+    - Variable term:
+        - Single variable
+            - e.g. x or y or a or b or c ...
+        
+    - Constant term:
+        - Single number
+            - e.g. 1, 2, 3 ...
