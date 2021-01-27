@@ -1,14 +1,18 @@
+let WIDTH = 400;
+let HEIGHT = 400;
+
+var mainExpression;
+
 function setup() {
     
-    createCanvas(400, 400);
+    createCanvas(WIDTH, HEIGHT);
     
     let a = new VariableTerm("x");
     let b = new ConstantTerm("10");
     
     let add = new AdditionOperation(a, b);
-    let add2 = new AdditionOperation(add, new ConstantTerm("20"));
     
-    console.log(add2.toString());
+    mainExpression = new SubtractionOperation(add, new ConstantTerm("20"));
     
 }
 
@@ -16,7 +20,24 @@ function draw() {
     
     background(51);
     
+    drawExpression(mainExpression, 24);
+    
 //    drawFraction("ax^2 + bx + c", "ax^2 + bx + c + sqrt(5)", 200, 100, 16);
+    
+}
+
+function drawExpression(expression, textSize_) {
+    
+    fill(255);
+    stroke(255);
+    
+    textFont('Georgia');
+    textStyle(ITALIC)
+    textSize(textSize_);
+    
+    let stringWidth = textWidth(expression.toString());
+    
+    text(expression.toString(), (WIDTH / 2) - (stringWidth / 2), HEIGHT / 2);
     
 }
 
