@@ -3,8 +3,11 @@ class DivisionOperation extends Operation {
     // valueOne is numerator
     // valueTwo is denominator
     constructor(valueOne, valueTwo) {
+        
         super(valueOne, valueTwo);
+        
         this.lineOff = 10;
+        
     }
     
     draw(x, y, hasSign) {
@@ -19,6 +22,7 @@ class DivisionOperation extends Operation {
         
         stroke(255);
         line(x, y, x + this.getDrawnWidth(), y);
+        noStroke();
         
         let centerX = x + (greaterWidth / 2);
         
