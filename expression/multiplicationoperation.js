@@ -5,26 +5,16 @@ class MultiplicationOperation extends Operation {
         this.gapWidth = 25;
     }
     
-    draw(x, y, hasSign) {
+    draw(x, y) {
         
         var oneWidth = 0;
         var twoWidth = 0;
         var totalWidth = 0;
         
-        if (hasSign) {
-            
-            var oneStr = "";
-            if (this.valueOne instanceof AdditionOperation) oneStr += "(";
-            oneStr += this.valueOne.toString();
-            if (this.valueOne instanceof AdditionOperation) oneStr += ")";
+        if (this.hasSign()) {
 
-            var twoStr = "";
-            if (this.valueTwo instanceof AdditionOperation) twoStr += "(";
-            twoStr += this.valueTwo.toString();
-            if (this.valueTwo instanceof AdditionOperation) twoStr += ")";
-
-            text(oneStr, x, y);
-            oneWidth = textWidth(oneStr);
+            text(this.getOneString(), x, y);
+            oneWidth = this.getOneWidth();
             x += oneWidth;
 
             let dotDiameter = 4;
@@ -33,20 +23,17 @@ class MultiplicationOperation extends Operation {
 
             x += this.gapWidth;
 
-            text(twoStr, x, y);
-            twoWidth = textWidth(twoStr);
+            text(this.getTwoString(), x, y);
+            twoWidth = this.getTwoWidth();
             x += twoWidth;
-
-            totalWidth = oneWidth + twoWidth + this.gapWidth;
             
         } else {
             
             text(this.toString(), x, y);
-            totalWidth = textSize(this.toString());
             
         }
         
-        return totalWidth;
+        return this.getDrawnWidth();
         
     }
     
@@ -72,6 +59,42 @@ class MultiplicationOperation extends Operation {
         
         return str;
 
+    }
+    
+    getDrawnWidth() {
+        if (this.hasSign()) {
+            return this.getOneWidth() + this.getTwoWidth() + this.gapWidth;
+        } else {
+            return textSize(this.toString());
+        }
+    }
+    
+    getOneString() {
+        var oneStr = "";
+        if (this.valueOne instanceof AdditionOperation) oneStr += "(";
+        oneStr += this.valueOne.toString();
+        if (this.valueOne instanceof AdditionOperation) oneStr += ")";
+        return oneStr;
+    }
+    
+    getOneWidth() {
+        return textWidth(this.getOneString());
+    }
+    
+    getTwoString() {
+        var twoStr = "";
+        if (this.valueTwo instanceof AdditionOperation) twoStr += "(";
+        twoStr += this.valueTwo.toString();
+        if (this.valueTwo instanceof AdditionOperation) twoStr += ")";
+        return twoStr;
+    }
+    
+    getTwoWidth() {
+        return textWidth(this.getTwoString());
+    }
+    
+    hasSign() {
+        return this.valueOne instanceof ConstantTerm && this.valueTwo instanceof ConstantTerm;
     }
     
 }
