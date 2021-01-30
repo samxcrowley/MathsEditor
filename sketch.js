@@ -28,17 +28,6 @@ function draw() {
     
     fill(255);
     
-//    let mult = new MultiplicationOperation(new VariableTerm("x"), new AdditionOperation(new ConstantTerm("5"), new ConstantTerm("10")));
-    
-//    let add = new AdditionOperation(mult, mult);
-    
-    //let add = new AdditionOperation(new ConstantTerm("5"), new ConstantTerm("10"));
-    
-    //add.draw(100, 100);
-    
-//    let simpleMult = new MultiplicationOperation(new ConstantTerm("5"), new VariableTerm("x"));
-//    simpleMult.draw(100, 100, false);
-    
 }
 
 function drawExpression(expression, textSize_) {
