@@ -1,8 +1,18 @@
 class MultiplicationOperation extends Operation {
     
     constructor(valueOne, valueTwo) {
+        
+        // swap values if constant and variable are in wrong order
+        if (valueTwo instanceof ConstantTerm && valueOne instanceof VariableTerm) {
+            var temp = valueOne;
+            valueOne = valueTwo;
+            valueTwo = temp;
+        }
+        
         super(valueOne, valueTwo);
+        
         this.gapWidth = 25;
+        
     }
     
     draw(x, y) {
@@ -88,9 +98,13 @@ class MultiplicationOperation extends Operation {
     }
     
     hasSign() {
-        return true;
-//        if (this.valueOne instanceof ConstantTerm || this.valueTwo instanceof ConstantTerm ||
-//           this.valueOne instanceof DivisionOperation || this.valueTwo instanceof DivisionOperation);
+        
+        if (this.valueOne instanceof ConstantTerm && this.valueTwo instanceof ConstantTerm) return true;
+        if (this.valueOne instanceof DivisionOperation) return true;
+        if (this.valueOne instanceof DivisionOperation) return true;
+        
+        return false;
+        
     }
     
 }
