@@ -1,3 +1,8 @@
+var MATHSFONT_REGULAR;
+var MATHSFONT_LIGHT;
+var MATHSFONT_BOLD;
+var FONT_SIZE;
+
 let WIDTH = 400;
 let HEIGHT = 400;
 
@@ -7,33 +12,42 @@ function setup() {
     
     createCanvas(WIDTH, HEIGHT);
     
-    let a = new VariableTerm("x");
-    let b = new ConstantTerm("10");
+    MATHSFONT_REGULAR = loadFont("font/Montserrat-Regular.otf");
+    MATHSFONT_LIGHT = loadFont("font/Montserrat-Light.otf");
+    MATHSFONT_BOLD = loadFont("font/Montserrat-Bold.otf");
+    FONT_SIZE = 20;
     
-    let add = new AdditionOperation(a, b);
-    
-    mainExpression = new SubtractionOperation(add, new ConstantTerm("20"));
+    textSize(FONT_SIZE);
+    textFont(MATHSFONT_REGULAR);
     
 }
 
 function draw() {
     
-    background(51);
+    background(17);
     
-    drawExpression(mainExpression, 24);
+    fill(255);
     
-//    drawFraction("ax^2 + bx + c", "ax^2 + bx + c + sqrt(5)", 200, 100, 16);
+//    let mult = new MultiplicationOperation(new VariableTerm("x"), new AdditionOperation(new ConstantTerm("5"), new ConstantTerm("10")));
+    
+//    let add = new AdditionOperation(mult, mult);
+    
+    //let add = new AdditionOperation(new ConstantTerm("5"), new ConstantTerm("10"));
+    
+    //add.draw(100, 100);
+    
+//    let simpleMult = new MultiplicationOperation(new ConstantTerm("5"), new VariableTerm("x"));
+//    simpleMult.draw(100, 100, false);
     
 }
 
 function drawExpression(expression, textSize_) {
     
-    fill(255);
-    stroke(255);
+    fill(160, 180, 255);
+    noStroke();
     
-    textFont('Georgia');
-    textStyle(ITALIC)
-    textSize(textSize_);
+    textFont(MATHSFONT_REGULAR);
+    textStyle(ITALIC);
     
     let stringWidth = textWidth(expression.toString());
     

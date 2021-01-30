@@ -16,4 +16,13 @@ class Term extends Expression {
         
     }
     
+    draw(x, y) {
+        text(this.toString(), x, y);
+        return textWidth(this.toString());
+    }
+    
+    toString() {
+        return this.value;
+    }
+    
 }

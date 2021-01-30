@@ -12,12 +12,20 @@ expression containing many smaller expressions.
 
 class Expression {
     
-    constructor() {
-        
+    constructor() {}
+    
+    toString() {}
+    
+    draw(x, y) {
+        return 0;
     }
     
-    toString() {
-        
+    getDrawnWidth() {
+        return textWidth(this.toString());
+    }
+    
+    getDrawnHeight() {
+        return FONT_SIZE;
     }
     
 }
