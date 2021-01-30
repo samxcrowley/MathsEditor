@@ -28,44 +28,32 @@ function draw() {
     
     fill(255);
     
-}
-
-function drawExpression(expression, textSize_) {
+    let div1 = new DivisionOperation(new ConstantTerm("5"), new ConstantTerm("2"));
+    let div2 = new DivisionOperation(new VariableTerm("x"), new ConstantTerm("2"));
     
-    fill(160, 180, 255);
-    noStroke();
+    var mainExpression;
     
-    textFont(MATHSFONT_REGULAR);
-    textStyle(ITALIC);
+    mainExpression = new MultiplicationOperation(new ConstantTerm("5"), new ConstantTerm("2"));
+    mainExpression = new AdditionOperation(new ConstantTerm("5"), new ConstantTerm("2"));
+    mainExpression = new MultiplicationOperation(div1, div2);
+    mainExpression = new AdditionOperation(div1, div2);
     
-    let stringWidth = textWidth(expression.toString());
-    
-    text(expression.toString(), (WIDTH / 2) - (stringWidth / 2), HEIGHT / 2);
+    mainExpression.draw(20, 200);
     
 }
 
-function drawFraction(a, b, x, y, textSize_) {
-    
-    fill(255);
-    stroke(255);
-    
-    textFont('Georgia');
-    textStyle(ITALIC)
-    textSize(textSize_);
-    
-    let aWidth = textWidth(a);
-    let bWidth = textWidth(b);
-    
-    text(a, x - (aWidth / 2), y);
-    text(b, x - (bWidth / 2), y + (textSize_ * 1.5));
-    
-    var lineWidth = 0;
-    
-    if (aWidth >= bWidth) lineWidth = aWidth;
-    else lineWidth = bWidth;
-    
-    lineWidth += 20;
-    
-    line(x - (lineWidth / 2), y + (textSize_ / 2), x + (lineWidth / 2), y + (textSize_ / 2));
-    
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

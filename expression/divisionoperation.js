@@ -18,14 +18,14 @@ class DivisionOperation extends Operation {
         let lineWidth = this.getDrawnWidth();
         
         stroke(255);
-        line(x - this.lineOff, y, x + greaterWidth + this.lineOff, y);
+        line(x, y, x + this.getDrawnWidth(), y);
         
         let centerX = x + (greaterWidth / 2);
         
-        this.valueOne.draw(centerX - (oneWidth / 2), y - 10);
-        this.valueTwo.draw(centerX - (twoWidth / 2), y + 23);
+        this.valueOne.draw(this.lineOff + centerX - (oneWidth / 2), y - 10);
+        this.valueTwo.draw(this.lineOff + centerX - (twoWidth / 2), y + 23);
         
-        return greaterWidth;
+        return this.getDrawnWidth();
         
     }
     
@@ -63,7 +63,7 @@ class DivisionOperation extends Operation {
         let greaterWidth = oneWidth;
         if (twoWidth >= oneWidth) greaterWidth = twoWidth;
         
-        return this.lineOff + greaterWidth + this.lineOff;
+        return greaterWidth + (this.lineOff * 2);
         
     }
     

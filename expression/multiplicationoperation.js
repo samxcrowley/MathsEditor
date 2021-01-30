@@ -11,27 +11,21 @@ class MultiplicationOperation extends Operation {
         var twoWidth = 0;
         var totalWidth = 0;
         
+        this.valueOne.draw(x, y);
+        x += this.getOneWidth();
+        
         if (this.hasSign()) {
-
-            text(this.getOneString(), x, y);
-            oneWidth = this.getOneWidth();
-            x += oneWidth;
 
             let dotDiameter = 4;
             noStroke();
             circle(x + (this.gapWidth / 2), y - (FONT_SIZE / 3), dotDiameter);
 
             x += this.gapWidth;
-
-            text(this.getTwoString(), x, y);
-            twoWidth = this.getTwoWidth();
-            x += twoWidth;
-            
-        } else {
-            
-            text(this.toString(), x, y);
             
         }
+        
+        this.valueTwo.draw(x, y);
+        twoWidth = this.getTwoWidth();
         
         return this.getDrawnWidth();
         
@@ -78,7 +72,7 @@ class MultiplicationOperation extends Operation {
     }
     
     getOneWidth() {
-        return textWidth(this.getOneString());
+        return this.valueOne.getDrawnWidth();
     }
     
     getTwoString() {
@@ -90,11 +84,28 @@ class MultiplicationOperation extends Operation {
     }
     
     getTwoWidth() {
-        return textWidth(this.getTwoString());
+        return this.valueOne.getDrawnWidth();
     }
     
     hasSign() {
-        return this.valueOne instanceof ConstantTerm && this.valueTwo instanceof ConstantTerm;
+        return true;
+//        if (this.valueOne instanceof ConstantTerm || this.valueTwo instanceof ConstantTerm ||
+//           this.valueOne instanceof DivisionOperation || this.valueTwo instanceof DivisionOperation);
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
