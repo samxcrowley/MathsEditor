@@ -37,6 +37,8 @@ function setup() {
     
     parser = new Parser();
     
+    mainExpressionObj = new Expression();
+    
 }
 
 function calculate() {
@@ -57,7 +59,9 @@ function draw() {
     text(mainExpressionRPN, 10, 80);
     text(mainExpressionResult, 10, 110);
     
-    //mainExpressionObj.draw((WIDTH / 2) - (w / 2), (HEIGHT / 2) - (h / 2));
+    let w = mainExpressionObj.getDrawnWidth();
+    let h = mainExpressionObj.getDrawnHeight();
+    mainExpressionObj.draw((WIDTH / 2) - (w / 2), (HEIGHT / 2) - (h / 2));
     
 }
 
