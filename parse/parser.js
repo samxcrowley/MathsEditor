@@ -21,11 +21,7 @@ class Parser {
         var output = "";
         var stack = [];
         
-        // TODO:
-        // convert infixString to tokens array
-        
-        // tokens is an array of expression elements to account for numbers with more than one digit
-        let tokens = infixString;
+        var tokens = this.tokenize(infixString);
         
         for (let i = 0; i < tokens.length; i++) {
             
@@ -40,7 +36,8 @@ class Parser {
                     
                     if ((currOper.leftAssociative && currOper.comparePrecedence(lastOper) <= 0) ||
                        (!currOper.leftAssociative && currOper.comparePrecedence(lastOper) < 0)) {
-                        output = output + stack.shift();
+                        
+                        output = output + stack.shift() + " ";
                         continue;
                     }
                     
@@ -51,26 +48,28 @@ class Parser {
                 stack.unshift(token);
                 
             } else if (token === "(") {
+                
                 stack.unshift(token);
+                
             } else if (token === ")") {
                 
                 while (stack.length != 0 && stack[0] !== "(") {
-                    output = output + stack.shift(token);
+                    output = output + stack.shift(token) + " ";
                 }
                 
                 stack.shift();
                 
             } else {
-                output = output + token;
+                output = output + token + " ";
             }
             
         }
         
         while (stack.length != 0) {
-            output = output + stack.shift();
+            output = output + stack.shift() + " ";
         }
         
-        output = output.replace(/\s/g,'')
+        output = output.substr(0, output.length - 1);
         
         return output;
         
@@ -79,15 +78,10 @@ class Parser {
     // returns the result after calculating an RPN string
     calculateRPN(rpnString) {
         
-        var tokens = rpnString.split("");
         var stack = [];
         
-        // remove empty elements
-        for (let i = tokens.length - 1; i >= 0; i--) {
-            if (tokens[i] === "") {
-                tokens.splice(i, 1);
-            }
-        }
+        var tokens = rpnString.split(" ");
+        console.log(tokens);
         
         for (let i = 0; i < tokens.length; i++) {
             
@@ -95,8 +89,8 @@ class Parser {
             
             if (this.operators.includes(token)) {
                 
-                var x = parseInt(stack.shift());
-                var y = parseInt(stack.shift());
+                var x = parseFloat(stack.shift());
+                var y = parseFloat(stack.shift());
                 
                 var result = 0;
                 
@@ -150,6 +144,10 @@ class Parser {
                 break;
         }
         
+    }
+    
+    tokenize(str) {
+        return str.replace(/\s+/g, "").match(/(?:(?<!\d)-)?\d+(?:\.\d+)?|./g);
     }
     
 }
