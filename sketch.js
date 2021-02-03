@@ -6,7 +6,15 @@ var FONT_SIZE;
 let WIDTH = 400;
 let HEIGHT = 400;
 
-var mainExpression;
+var parser;
+
+var mainExpressionInput = "";
+var mainExpressionRPN = "";
+var mainExpressionResult = "";
+var mainExpressionObj;
+
+let inputField;
+let inputButton;
 
 function setup() {
     
@@ -20,11 +28,26 @@ function setup() {
     textSize(FONT_SIZE);
     textFont(MATHSFONT_REGULAR);
     
-    var parser = new Parser();
+    inputField = createInput();
+    inputField.position(20, HEIGHT + 10);
+    
+    inputButton = createButton('Calculate');
+    inputButton.position(inputField.x + inputField.width + 20, HEIGHT + 10);
+    inputButton.mousePressed(calculate);
+    
+    parser = new Parser();
     
     var rpn = parser.infixToRPN("5^2+1");
     console.log(rpn);
     console.log(parser.calculateRPN(rpn));
+    
+}
+
+function calculate() {
+    
+    mainExpressionInput = inputField.value();
+    mainExpressionRPN = parser.infixToRPN(mainExpressionInput);
+    mainExpressionResult = parser.calculateRPN(mainExpressionRPN);
     
 }
 
@@ -33,6 +56,10 @@ function draw() {
     background(17);
     
     fill(255);
+    
+    text(mainExpressionInput, 10, 50);
+    text(mainExpressionRPN, 10, 80);
+    text(mainExpressionResult, 10, 110);
     
     let div1 = new DivisionOperation(new ConstantTerm("5"), new ConstantTerm("2"));
     let div2 = new DivisionOperation(new VariableTerm("x"), new AdditionOperation(new VariableTerm("z"), new ConstantTerm("2")));
