@@ -10,12 +10,21 @@ variable x as its second. The operation would then represent the expression
 
 class Operation extends Expression {
     
-    constructor(valueOne, valueTwo) {
+    /*
+        symbol: operation's symbol etc. '+', '-', '*', etc.
+        leftAssociative: boolean true if operation is left associative
+        precedence: int describing operation's level of precedence over other operations
+    */
+    constructor(valueOne, valueTwo, symbol, leftAssociative, precedence) {
         
         super();
         
         this.valueOne = valueOne;
         this.valueTwo = valueTwo;
+        
+        this.symbol = symbol;
+        this.leftAssociative = leftAssociative;
+        this.precedence = precedence;
         
     }
     

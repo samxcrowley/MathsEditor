@@ -2,7 +2,7 @@ class AdditionOperation extends Operation {
     
     constructor(valueOne, valueTwo) {
         
-        super(valueOne, valueTwo, "+");
+        super(valueOne, valueTwo, "+", true, 0);
         
         this.gapWidth = 25;
         
@@ -14,8 +14,8 @@ class AdditionOperation extends Operation {
         
         x += oneWidth;
         
-        let signWidth = textWidth("+");
-        text("+", x + (this.gapWidth / 2) - (signWidth / 2), y);
+        let symbolWidth = textWidth(this.symbol);
+        text(this.symbol, x + (this.gapWidth / 2) - (symbolWidth / 2), y);
         
         x += this.gapWidth;
         
@@ -37,7 +37,7 @@ class AdditionOperation extends Operation {
         if (this.valueOne instanceof AdditionOperation)
             str += ")";
         
-        str += " + ";
+        str += " " + this.symbol + " ";
         
         if (this.valueTwo instanceof AdditionOperation)
             str += "(";
