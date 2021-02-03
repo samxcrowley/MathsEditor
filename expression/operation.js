@@ -28,6 +28,10 @@ class Operation extends Expression {
         
     }
     
+    comparePrecedence(operation) {
+        return this.precedence - operation.precedence;
+    }
+    
 }
 
 

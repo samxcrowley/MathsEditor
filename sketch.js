@@ -20,6 +20,13 @@ function setup() {
     textSize(FONT_SIZE);
     textFont(MATHSFONT_REGULAR);
     
+    var parser = new Parser();
+    
+    console.log(parser.infixToRPN("A + B"));
+    console.log(parser.infixToRPN("A ^ 200 + 2 * A * B + B ^ 2"));
+    console.log(parser.infixToRPN("( ( 1  + 2 ) / 3 ) ^ 4"));
+    console.log(parser.infixToRPN("( 1 + 2 ) * ( 3 / 4 ) ^ ( 5 + 6 )	"));
+    
 }
 
 function draw() {
