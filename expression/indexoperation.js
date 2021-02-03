@@ -4,7 +4,7 @@ class IndexOperation extends Operation {
     // valueTwo is index (Constant)
     constructor(valueOne, valueTwo) {
         
-        super(valueOne, valueTwo);
+        super(valueOne, valueTwo, "^", false, 10);
         
         this.index_size = FONT_SIZE / 1.5;
         

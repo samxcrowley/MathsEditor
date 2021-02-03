@@ -9,7 +9,7 @@ class MultiplicationOperation extends Operation {
             valueTwo = temp;
         }
         
-        super(valueOne, valueTwo);
+        super(valueOne, valueTwo, "*", true, 5);
         
         this.gapWidth = 25;
         
