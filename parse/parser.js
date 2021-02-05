@@ -1,10 +1,9 @@
 /*
 
-Infix notation e.g.: "A ^ 2 + 2 * A * B + B ^ 2"
-RPN notation e.g.: "A 2 ^ 2 A * B * + B 2 ^ +"
+Infix notation e.g.: "A ^ 2 + 2 * A * B + B ^ 2" (operators in between operands)
+RPN notation e.g.: "A 2 ^ 2 A * B * + B 2 ^ +" (operators after operands)
 
 infixToRPN algorithm adapted from https://www.andreinc.net/2010/10/05/converting-infix-to-rpn-shunting-yard-algorithm
-
 calculateRPN algorithm adapted from https://codereview.stackexchange.com/questions/120451/reverse-polish-notation-calculator-in-java
 
 */
@@ -81,7 +80,6 @@ class Parser {
         var stack = [];
         
         var tokens = rpnString.split(" ");
-        console.log(tokens);
         
         for (let i = 0; i < tokens.length; i++) {
             
@@ -124,6 +122,57 @@ class Parser {
         
     }
     
+    // converts an RPN string to an Expression object containing child expressions
+    rpnToExpressionObj(rpnString) {
+        
+        var stack = [];
+        
+        var tokens = rpnString.split(" ");
+        
+        for (let i = 0; i < tokens.length; i++) {
+            
+            var token = tokens[i];
+            
+            if (this.operators.includes(token)) {
+                
+                var x = stack.shift();
+                var y = stack.shift();
+                
+                var operation;
+                
+                switch (token) {
+                    case '+':
+                        operation = new AdditionOperation(y, x);
+                        break;
+                    case '-':
+                        operation = new SubtractionOperation(y, x);
+                        break;
+                    case '*':
+                        operation = new MultiplicationOperation(y, x);
+                        break;
+                    case '/':
+                        operation = new DivisionOperation(y, x);
+                        break;
+                    case '^':
+                        operation = new IndexOperation(y, x);
+                        break;
+                }
+                
+                stack.unshift(operation);
+                
+            } else {
+                
+                var constant = new ConstantTerm(token);
+                stack.unshift(constant);
+                
+            }
+            
+        }
+        
+        return stack.shift();
+        
+    }
+    
     getOperationFromSymbol(symbol) {
         
         switch (symbol) {
@@ -146,6 +195,7 @@ class Parser {
         
     }
     
+    // splits a string into separate tokens; digits, parentheses, letters, etc.
     tokenize(str) {
         return str.replace(/\s+/g, "").match(/(?:(?<!\d)-)?\d+(?:\.\d+)?|./g);
     }
