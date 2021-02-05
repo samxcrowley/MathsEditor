@@ -8,7 +8,12 @@ class AdditionOperation extends Operation {
         
     }
     
-    draw(x, y) {
+    draw(x, y, brackets) {
+        
+        if (brackets) {
+            text("(", x, y);
+            x += textWidth("(");
+        }
         
         let oneWidth = this.valueOne.draw(x, y);
         
@@ -20,6 +25,12 @@ class AdditionOperation extends Operation {
         x += this.gapWidth;
         
         let twoWidth = this.valueTwo.draw(x, y);
+        
+        x += twoWidth;
+        
+        if (brackets) {
+            text(")", x, y);
+        }
         
         return this.getDrawnWidth();
         

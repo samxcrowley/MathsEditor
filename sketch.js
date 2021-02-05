@@ -46,6 +46,7 @@ function calculate() {
     mainExpressionInput = inputField.value();
     mainExpressionRPN = parser.infixToRPN(mainExpressionInput);
     mainExpressionResult = parser.calculateRPN(mainExpressionRPN);
+    mainExpressionObj = parser.rpnToExpressionObj(mainExpressionRPN);
     
 }
 

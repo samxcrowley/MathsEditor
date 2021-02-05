@@ -11,8 +11,8 @@ variable x as its second. The operation would then represent the expression
 class Operation extends Expression {
     
     /*
-        symbol: operation's symbol etc. '+', '-', '*', etc.
-        leftAssociative: boolean true if operation is left associative
+        symbol: '+', '-', '*', etc.
+        leftAssociative: true if operation is left associative
         precedence: int describing operation's level of precedence over other operations
     */
     constructor(valueOne, valueTwo, symbol, leftAssociative, precedence) {
